@@ -1,0 +1,225 @@
+/*-----------------------------------------------------------------------------------------------------
+
+  Open Weather Stylesheet
+
+  [Table of contents]
+
+  Mobile > base
+  Tablet > min-width: 768px
+
+  1. Typography
+  2. UI Structure
+  	2.1 Table responsive
+  3. Specfic element styling
+  	
+
+
+------------------------------------------------------------------------------------------------------*/
+
+html, body{ 
+	height:100%;
+	min-height:100%;
+	font-size: 12px;
+}
+
+body{
+	font-family: Helvetica,Arial,sans-serif;
+	line-height: 1.42857143;
+	color: #333;
+	background-color: #fff;
+	margin:0;
+	padding:0;	
+}
+
+
+/*-----------------------
+  1. Typography
+------------------------*/
+
+
+h1{
+	text-align: center;
+	display:block;
+}
+
+a, a:link, a:active{
+	color:#003399;
+}
+
+
+/*-----------------------
+  2. UI Structure
+------------------------*/
+
+input, select {
+	outline: none;
+	z-index: 0;
+	border:1px solid #eee;
+}
+
+header,footer,main{
+	margin:0;
+	padding:0;	
+}
+
+header .containers {
+	background-color: #1DD;
+	display:block;
+	color:#fff;
+	width:100%;
+	height:40px;
+	padding:5px;
+	position: fixed;
+	z-index: 1;
+}
+
+header a, header a:link, header a:active{
+	color:#eee;
+}
+
+footer p {
+	margin-top:7px;
+	padding-right: 20px;
+	position: relative;
+	font-size: 0.8em;
+}
+
+header .containers{
+	top:0;
+}
+
+footer .containers{
+	bottom:0;
+	height:30px;
+	text-align: right;
+}
+
+main .containers{
+	margin-top:70px;
+	padding:0 10px;
+}
+
+/*-----------------------
+  2.1 Table responsive
+------------------------*/
+
+table {
+	border-collapse: collapse;
+	width:100%;
+	margin:20px 0;
+}
+
+table thead tr, table tbody tr{
+	border:1px solid #eee;
+}
+
+table *{
+	vertical-align: middle;
+}
+
+
+table thead{
+	display:none;
+}
+
+table td{
+	display: block;
+	padding:10px;
+}
+
+table tbody td:before{
+	content: attr(data-heading)": ";
+	width:50%;
+	display: inline-block;
+	text-align: left;
+	font-weight: bold;
+}
+
+table tbody br{
+	display: none;
+}
+
+table span{
+	display:inline;
+}
+
+
+/*-----------------------
+  3. Specific Element Styling
+------------------------*/
+
+
+header .containers h1{
+	margin:0px;
+	color:#eee;
+}
+
+main .containers .lead{
+	text-align: center;
+}
+
+main .containers #search-form{
+	padding:0;
+	margin:0 auto;
+	width: 90%;
+	left: -10px;
+	position: relative;
+}
+
+main .containers #search-form #search{	
+	width:95%;
+	padding:5px 10px;
+	margin:0;
+	font-size: 1.5em;
+	position: relative;
+}
+
+span[data-temp-range]{
+	font-size: 0.8em;
+}
+
+span[data-temp-range]:before{
+	content: "( ";
+}
+
+span[data-temp-range]:after{
+	content: " )";
+}
+
+
+
+
+@media screen and (min-width: 800px){
+
+	/*-----------------------
+	  2.1 Table Responsive
+	------------------------*/
+
+	table *{
+		text-align: center;
+	}
+
+	table thead{
+		display:table-row-group;
+	}
+
+	table th{
+		padding:10px;
+	}
+
+	table td{
+		display:table-cell;
+	}
+
+	table tbody br, span[data-temp-range]{
+		display:block;
+	}
+
+	table tbody td:before{
+		content: "";
+		width:auto;
+		display: inline;
+		text-align: inherit;
+		font-weight: inherit;
+	}
+}
