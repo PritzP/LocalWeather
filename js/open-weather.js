@@ -2,11 +2,12 @@ $(function(){
 
 
 	OpenWeather = function(){
+		'use strict';
 		var results_table = $('table[data-openweather]');
 		var results_table_body = results_table.find('tbody');
 		var results_table_foot = results_table.find('tfoot');
 		var preloader = new Image();
-			preloader.src='../images/preloader.gif';
+			preloader.src='images/preloader.gif';
 			preloader.width = '20';
 
 		var config = {
@@ -22,6 +23,15 @@ $(function(){
 				},
 				{
 					'name': 'Birmingham' 
+				},
+				{
+					'name': 'Newcastle' 
+				},
+				{
+					'name': 'Edinburgh' 
+				},
+				{
+					'name': 'Cardiff' 
 				}
 			),
 			'get_weather_url': 'http://api.openweathermap.org/data/2.5/weather', 
@@ -72,7 +82,7 @@ $(function(){
 		var display_ui = function(results){
 			var table_row = '';
 			$.each(results, function(index, value){
-				table_row += '<tr><td data-city data-heading="City">' + String(value.weather.name).capitalize() + '</td><td data-location data-heading="Location">Lat: ' + value.weather.coord.lat  + ' <br/> Long: ' + value.weather.coord.lon  + '</td><td data-conditions data-heading="Conditions">' + String(value.weather.weather[0].description).capitalize()  + ' ' + getIconForWeatherFor(value.weather.weather[0].icon)  + '</td><td data-temp data-heading="Temperiture">' + (value.weather.main.temp).toFixed(2) + ' <span data-temp-range>' + (value.weather.main.temp_min).toFixed(2) + ' - ' + (value.weather.main.temp_max).toFixed(2) + '</span></td><td data-atmospheric data-heading="Atmospheric pressure">' + value.weather.main.pressure + '</td><td data-humidity data-heading="Humidity">' + value.weather.main.humidity + '</td></tr>';
+				table_row += '<tr><td data-city data-heading="City">' + String(value.weather.name).capitalize() + '</td><td data-location data-heading="Location">Lat: ' + value.weather.coord.lat  + ' <br/> Long: ' + value.weather.coord.lon  + '</td><td data-conditions data-heading="Conditions">' + String(value.weather.weather[0].description).capitalize()  + ' ' + getIconForWeatherFor(value.weather.weather[0].icon)  + '</td><td data-temp data-heading="Temperiture">' + (value.weather.main.temp / 100).toFixed(2) + '&deg; <span data-temp-range>' + (value.weather.main.temp_min / 100).toFixed(2) + '&deg; - ' + (value.weather.main.temp_max / 100).toFixed(2) + '&deg;</span></td><td data-atmospheric data-heading="Atmospheric pressure">' + value.weather.main.pressure + '</td><td data-humidity data-heading="Humidity">' + value.weather.main.humidity + '</td></tr>';
 			});
 			results_table_body.html(table_row);
 			results_table_body.find('tr').fadeIn();
@@ -109,6 +119,7 @@ $(function(){
 
 	$weather = new OpenWeather();
 	$weather.getAllWeather();
+	$weather = Object.seal($weather);
 
 	$('#search').on("keyup",function(){
 		var value = $(this).val();
